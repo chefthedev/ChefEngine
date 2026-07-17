@@ -3,6 +3,9 @@ using System;
 
 namespace ChefEngine.Graphics
 {
+    /// <summary>
+    /// Sprite class that represents a visual object created from a texture region with support for animations.
+    /// </summary>
     public class AnimatedSprite : Sprite
     {
         // The current animation frame.

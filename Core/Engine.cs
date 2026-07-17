@@ -1,7 +1,9 @@
 ﻿using System;
+using ChefEngine.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace ChefEngine.Core
 {
@@ -29,6 +31,12 @@ namespace ChefEngine.Core
         // ContentManager for loading game assets.
         // Note: new keyword is used to hide the inherited Content property from the Game class.
         public static new ContentManager Content { get; private set; }
+
+        // InputManager for unified input handling.
+        public static InputManager Input { get; private set; }
+
+        // ExitOnEscape flag for exit behavior.
+        public static bool ExitOnEscape { get; set; }
 
         /// <summary>
         /// Constructor for the Engine class.
@@ -71,6 +79,9 @@ namespace ChefEngine.Core
 
             // Set the default mouse visibility.
             IsMouseVisible = true;
+
+            // Set the default exit on escape behavior.
+            ExitOnEscape = true;
         }
 
         protected override void Initialize()
@@ -83,6 +94,25 @@ namespace ChefEngine.Core
 
             // Create the SpriteBatch instance.
             SpriteBatch = new SpriteBatch(GraphicsDevice);
+
+            // Create the InputManager.
+            Input = new InputManager();
+        }
+
+        protected override void Update(GameTime gameTime)
+        {
+            // Update the input manager
+            Input.Update();
+
+            // If exit on escape is enabled and the escape key was just pressed.
+            if (ExitOnEscape && Input.Keyboard.WasKeyJustPressed(Keys.Escape))
+            {
+                // Exit the game.
+                Exit();
+            }
+
+            // Call the base class's Update method.
+            base.Update(gameTime);
         }
     }
 }
