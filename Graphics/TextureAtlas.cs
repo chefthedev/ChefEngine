@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
@@ -16,6 +17,9 @@ namespace ChefEngine.Graphics
         // Dictionary to store the texture regions by name.
         private Dictionary<string, TextureRegion> _textureRegions;
 
+        // Dictionary to store animations by name.
+        private Dictionary<string, Animation> _animations;
+
         // The overall texture that contains all the regions.
         public Texture2D Texture { get; private set; }
 
@@ -24,8 +28,9 @@ namespace ChefEngine.Graphics
         /// </summary>
         public TextureAtlas()
         {
-            // Initialize the texture regions dictionary.
+            // Initialize the texture regions and animations dictionaries.
             _textureRegions = new Dictionary<string, TextureRegion>();
+            _animations = new Dictionary<string, Animation>();
         }
 
         /// <summary>
@@ -34,9 +39,10 @@ namespace ChefEngine.Graphics
         /// <param name="texture">The overall texture containing the regions.</param>
         public TextureAtlas(Texture2D texture)
         {
-            // Set the overall texture and initialize the texture regions dictionary.
+            // Set the overall texture and initialize the texture regions and animations dictionaries.
             Texture = texture;
             _textureRegions = new Dictionary<string, TextureRegion>();
+            _animations = new Dictionary<string, Animation>();
         }
 
         /// <summary>
@@ -82,6 +88,47 @@ namespace ChefEngine.Graphics
         {
             // Clear the dictionary of texture regions.
             _textureRegions.Clear();
+        }
+
+        /// <summary>
+        /// Adds a new animation to the atlas.
+        /// </summary>
+        /// <param name="name">The name of the animation.</param>
+        /// <param name="animation">The animation instance.</param>
+        public void AddAnimation(string name, Animation animation)
+        {
+            // Add the animation to the dictionary.
+            _animations.Add(name, animation);
+        }
+
+        /// <summary>
+        /// Gets an animation by name from the atlas.
+        /// </summary>
+        /// <param name="name">The name of the animation.</param>
+        /// <returns>The desired animation, or null if not found.</returns>
+        public Animation GetAnimation(string name)
+        {
+            // Return the animation if it exists, otherwise return null.
+            return _animations.GetValueOrDefault(name);
+        }
+
+        /// <summary>
+        /// Removes an animation by name from the atlas.
+        /// </summary>
+        /// <param name="name">The name of the animation.</param>
+        public void RemoveAnimation(string name)
+        {
+            // Remove the animation from the dictionary if it exists.
+            _animations.Remove(name);
+        }
+
+        /// <summary>
+        /// Clears all animations from the atlas.
+        /// </summary>
+        public void ClearAnimations()
+        {
+            // Clear the dictionary of animations.
+            _animations.Clear();
         }
 
         /// <summary>
@@ -136,11 +183,92 @@ namespace ChefEngine.Graphics
                             }
                         }
                     }
+
+                    // Get the <Animations> element and its child <Animation> elements
+                    IEnumerable<XElement> animations = root.Element("Animations")?.Elements("Animation");
+
+                    // If the animations element is not null
+                    if (animations != null)
+                    {
+                        // For each animation element
+                        foreach (XElement animation in animations)
+                        {
+                            // Get the name and delay attributes and parse them into variables.
+                            string name = animation.Attribute("name")?.Value;
+                            float delayMs = float.Parse(animation.Attribute("delay")?.Value ?? "0");
+                            TimeSpan delayMsTimespan = TimeSpan.FromMilliseconds(delayMs);
+
+                            // Initialize the frame region list
+                            List<TextureRegion> frameRegionList = new List<TextureRegion>();
+
+                            // Get the <Animation> element's child <Frame> elements
+                            IEnumerable<XElement> frames = animation.Elements("Frame");
+
+                            // If the frames element list is not null
+                            if (frames != null)
+                            {
+                                // For each frame element
+                                foreach (XElement frame in frames)
+                                {
+                                    // Get the region attribute and parse it into a variable.
+                                    string frameRegion = frame.Attribute("region")?.Value;
+
+                                    // If the frame has a valid region.
+                                    if (!string.IsNullOrEmpty(frameRegion))
+                                    {
+                                        // Create the texture region
+                                        TextureRegion textureRegion = atlas.GetRegion(frameRegion);
+
+                                        // Add the texture region to the frame region list.
+                                        frameRegionList.Add(textureRegion);
+                                    }
+                                }
+                            }
+
+                            // If the animation has a valid name.
+                            if (!string.IsNullOrEmpty(name))
+                            {
+                                // Create the animation
+                                Animation animationToAdd = new Animation(frameRegionList, delayMsTimespan);
+
+                                // Add the animation to the atlas using the parsed values.
+                                atlas.AddAnimation(name, animationToAdd);
+                            }
+                        }
+                    }
                 }
             }
 
             // Return the atlas.
             return atlas;
+        }
+
+        /// <summary>
+        /// Creates a sprite from a region in the texture atlas.
+        /// </summary>
+        /// <param name="textureRegionName">The name of the texture region to create the sprite from.</param>
+        /// <returns>Sprite using the texture region as it's source.</returns>
+        public Sprite CreateSprite(string textureRegionName)
+        {
+            // Get the texture region from the atlas.
+            TextureRegion region = GetRegion(textureRegionName);
+
+            // Create and return the sprite.
+            return new Sprite(region);
+        }
+
+        /// <summary>
+        /// Creates an animated sprite from an animation in the texture atlas.
+        /// </summary>
+        /// <param name="animationName">The name of the animation to create the sprite from.</param>
+        /// <returns>Animated sprite using the animation as it's source.</returns>
+        public AnimatedSprite CreateAnimatedSprite(string animationName)
+        {
+            // Get the animation from the atlas.
+            Animation animation = GetAnimation(animationName);
+
+            // Create and return the animated sprite.
+            return new AnimatedSprite(animation);
         }
     }
 }

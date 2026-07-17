@@ -36,17 +36,17 @@ namespace ChefEngine.Graphics
         }
 
         /// <summary>
-        /// Draw the texture region in the current SpriteBatch context.
+        /// Submit the texture region for drawing to the current sprite batch.
         /// </summary>
         /// <param name="spriteBatch">The sprite batch to draw the region in.</param>
-        /// <param name="position">The position to draw the texture region at.</param>
+        /// <param name="position">The position to draw the texture region at, based on it's origin.</param>
         /// <param name="color">The color mask to apply to the drawn texture region.</param>
         /// <param name="rotation">The rotation to apply to the drawn texture region.</param>
-        /// <param name="origin">The origin of texture transformations of this region.</param>
+        /// <param name="origin">The origin of drawing and texture transformations of this region.</param>
         /// <param name="scale">The scale to apply to the drawn texture region.</param>
         /// <param name="spriteEffects">The sprite effects to apply to the drawn texture region.</param>
         /// <param name="layerDepth">The layer depth to assign to the drawn texture region.</param>
-        public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color, float rotation, Vector2 origin, float scale, SpriteEffects spriteEffects, float layerDepth)
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, Color color, float rotation, Vector2 origin, Vector2 scale, SpriteEffects spriteEffects, float layerDepth)
         {
             // Draw the texture region using the provided parameters.
             spriteBatch.Draw(
