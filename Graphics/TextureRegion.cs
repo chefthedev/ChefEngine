@@ -9,10 +9,10 @@ namespace ChefEngine.Graphics
     public class TextureRegion
     {
         // The overall texture being referenced by the region.
-        public Texture2D Texture { get; set; }
+        public Texture2D Texture { get; private set; }
 
         // The rectangular area of the texture this region represents.
-        public Rectangle SourceRectangle { get; set; }
+        public Rectangle SourceRectangle { get; private set; }
 
         // The width of the texture region.
         public int Width => SourceRectangle.Width;
@@ -39,7 +39,7 @@ namespace ChefEngine.Graphics
         /// Submit the texture region for drawing to the current sprite batch.
         /// </summary>
         /// <param name="spriteBatch">The sprite batch to draw the region in.</param>
-        /// <param name="position">The position to draw the texture region at, based on it's origin.</param>
+        /// <param name="position">The position to draw the texture region at, based on its origin.</param>
         /// <param name="color">The color mask to apply to the drawn texture region.</param>
         /// <param name="rotation">The rotation to apply to the drawn texture region.</param>
         /// <param name="origin">The origin of drawing and texture transformations of this region.</param>
@@ -59,6 +59,26 @@ namespace ChefEngine.Graphics
                 scale,
                 spriteEffects,
                 layerDepth
+            );
+        }
+
+        /// <summary>
+        /// Overloaded Draw method for simpler calling.
+        /// </summary>
+        /// <param name="spriteBatch">The sprite batch to draw the region in.</param>
+        /// <param name="position">The position to draw the texture region at, based on the default origin.</param>
+        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        {
+            // Draw the texture region using the provided parameters and defaults.
+            Draw(
+                spriteBatch,
+                position,
+                Color.White,
+                0.0f,
+                Vector2.Zero,
+                Vector2.One,
+                SpriteEffects.None,
+                0.0f
             );
         }
     }
