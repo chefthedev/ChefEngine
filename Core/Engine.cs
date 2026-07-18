@@ -1,7 +1,6 @@
 ﻿using System;
 using ChefEngine.Input;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -12,31 +11,37 @@ namespace ChefEngine.Core
     /// </summary>
     public class Engine : Game
     {
-        // Internal static reference to the singleton Engine instance.
-        internal static Engine _instance;
+        // Singleton Engine instance.
+        private static Engine _instance;
 
-        // Public static property to access the singleton Engine instance.
-        public static Engine Instance => _instance;
+        // Public property for accessing the singleton Engine instance.
+        public static Engine Instance
+        {
+            get
+            {
+                // If the singleton Engine instance is null.
+                if (_instance == null)
+                {
+                    // Throw an exception.
+                    throw new InvalidOperationException("Engine has not been initialized.");
+                }
+
+                // Return the Engine instance.
+                return _instance;
+            }
+        }
 
         // GraphicsDeviceManager for interfacing and managing the graphics hardware.
-        public static GraphicsDeviceManager Graphics { get; private set; }
-
-        // GraphicsDevice for primitive based rendering.
-        // Note: new keyword is used to hide the inherited GraphicsDevice property from the Game class.
-        public static new GraphicsDevice GraphicsDevice { get; private set; }
+        public GraphicsDeviceManager Graphics { get; private set; }
 
         // SpriteBatch for optimized 2D rendering.
-        public static SpriteBatch SpriteBatch { get; private set; }
-
-        // ContentManager for loading game assets.
-        // Note: new keyword is used to hide the inherited Content property from the Game class.
-        public static new ContentManager Content { get; private set; }
+        public SpriteBatch SpriteBatch { get; private set; }
 
         // InputManager for unified input handling.
-        public static InputManager Input { get; private set; }
+        public InputManager Input { get; private set; }
 
-        // ExitOnEscape flag for exit behavior.
-        public static bool ExitOnEscape { get; set; }
+        // ExitOnEscape flag for exit behavior, with a default value of true.
+        public bool ExitOnEscape { get; set; } = true;
 
         /// <summary>
         /// Constructor for the Engine class.
@@ -54,9 +59,6 @@ namespace ChefEngine.Core
                 throw new InvalidOperationException("The Engine class is a singleton. Only one instance is allowed.");
             }
 
-            // Set the internal Engine reference to this object instance.
-            _instance = this;
-
             // Create a new GraphicsDeviceManager.
             Graphics = new GraphicsDeviceManager(this);
 
@@ -71,26 +73,20 @@ namespace ChefEngine.Core
             // Set the window title.
             Window.Title = title;
 
-            // Set the Engine's content manager to the inherited Content property from the Game class.
-            Content = base.Content;
-
             // Set the root directory for the content.
             Content.RootDirectory = "Content";
 
             // Set the default mouse visibility.
             IsMouseVisible = true;
 
-            // Set the default exit on escape behavior.
-            ExitOnEscape = true;
+            // Set the internal Engine reference to this object instance.
+            _instance = this;
         }
 
         protected override void Initialize()
         {
             // Call the base class's Initialize method.
             base.Initialize();
-
-            // Set the Engine's graphics device to the inherited GraphicsDevice property from the Game class.
-            GraphicsDevice = base.GraphicsDevice;
 
             // Create the SpriteBatch instance.
             SpriteBatch = new SpriteBatch(GraphicsDevice);
@@ -101,7 +97,7 @@ namespace ChefEngine.Core
 
         protected override void Update(GameTime gameTime)
         {
-            // Update the input manager
+            // Update the input manager.
             Input.Update();
 
             // If exit on escape is enabled and the escape key was just pressed.
