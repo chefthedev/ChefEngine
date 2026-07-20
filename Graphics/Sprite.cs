@@ -9,7 +9,7 @@ namespace ChefEngine.Graphics
     public class Sprite
     {
         // The overall texture region being referenced by the sprite.
-        public TextureRegion TextureRegion { get; set; }
+        public TextureRegion TextureRegion { get; protected set; }
 
         // The color mask of the sprite.
         public Color Color { get; set; } = Color.White;
@@ -36,14 +36,6 @@ namespace ChefEngine.Graphics
         public float Height => TextureRegion.Height * Scale.Y;
 
         /// <summary>
-        /// Empty constructor for the Sprite class.
-        /// </summary>
-        public Sprite()
-        {
-
-        }
-
-        /// <summary>
         /// Constructor for the Sprite class.
         /// </summary>
         /// <param name="textureRegion">The overall source texture region to set.</param>
@@ -51,15 +43,6 @@ namespace ChefEngine.Graphics
         {
             // Set the overall texture region for this sprite.
             TextureRegion = textureRegion;
-        }
-
-        /// <summary>
-        /// Sets the origin of the sprite to the center of its texture region.
-        /// </summary>
-        public void CenterOrigin()
-        {
-            // Set the origin.
-            Origin = new Vector2(TextureRegion.Width, TextureRegion.Height) * 0.5f;
         }
 
         /// <summary>

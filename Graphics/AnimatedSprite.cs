@@ -23,8 +23,10 @@ namespace ChefEngine.Graphics
             get => _animation; // Gets the current animation.
             set
             {
-                // Sets the current animation and starts the animation frames at the 0 index.
+                // Sets the current animation and resets the state variables.
                 _animation = value;
+                _animationFrame = 0;
+                _timeSinceAnimationFrameChange = TimeSpan.Zero;
                 TextureRegion = _animation.AnimationFrames[0];
             }
         }
@@ -33,19 +35,23 @@ namespace ChefEngine.Graphics
         /// Constructor for the animated sprite class.
         /// </summary>
         /// <param name="animation">The initial animation to load into the sprite.</param>
-        public AnimatedSprite(Animation animation)
+        public AnimatedSprite(Animation animation) : base(animation.AnimationFrames[0])
         {
-            // Set the current animation, which also initializes the TextureRegion property.
+            // Set the current animation.
             Animation = animation;
         }
 
+        /// <summary>
+        /// Updates the state of the animated sprite.
+        /// </summary>
+        /// <param name="gameTime">The game time instance.</param>
         public void Update(GameTime gameTime)
         {
             // Add the elapsed game time to the time since animation frame change.
             _timeSinceAnimationFrameChange += gameTime.ElapsedGameTime;
 
-            // If the time since animation frame change exceeds the current animation's delay.
-            if (_timeSinceAnimationFrameChange >= _animation.DelayMs)
+            // While the time since animation frame change exceeds the current animation's delay.
+            while (_timeSinceAnimationFrameChange >= _animation.DelayMs)
             {
                 // Get the next index in the animation sequence, capped at the count.
                 _animationFrame += 1;

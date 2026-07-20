@@ -9,10 +9,10 @@ namespace ChefEngine.Graphics
     public class Animation
     {
         // The list of texture regions to sequence through in the animation.
-        public List<TextureRegion> AnimationFrames { get; set; }
+        public List<TextureRegion> AnimationFrames { get; private set; }
 
         // The delay between each animation frame in the sequence, in milliseconds
-        public TimeSpan DelayMs { get; set; }
+        public TimeSpan DelayMs { get; private set; }
 
         /// <summary>
         /// Constructor for the animation class.
