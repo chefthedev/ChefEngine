@@ -51,7 +51,7 @@ namespace ChefEngine.Graphics
             _timeSinceAnimationFrameChange += gameTime.ElapsedGameTime;
 
             // While the time since animation frame change exceeds the current animation's delay.
-            while (_timeSinceAnimationFrameChange >= _animation.DelayMs)
+            while (_timeSinceAnimationFrameChange >= _animation.Delay)
             {
                 // Get the next index in the animation sequence, capped at the count.
                 _animationFrame += 1;
@@ -64,7 +64,7 @@ namespace ChefEngine.Graphics
                 TextureRegion = _animation.AnimationFrames[_animationFrame];
 
                 // Reset the time since animation frame change using negative delay, which is lag-spike friendly.
-                _timeSinceAnimationFrameChange -= _animation.DelayMs;
+                _timeSinceAnimationFrameChange -= _animation.Delay;
             }
         }
     }

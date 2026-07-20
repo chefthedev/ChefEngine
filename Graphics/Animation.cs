@@ -11,19 +11,19 @@ namespace ChefEngine.Graphics
         // The list of texture regions to sequence through in the animation.
         public List<TextureRegion> AnimationFrames { get; private set; }
 
-        // The delay between each animation frame in the sequence, in milliseconds
-        public TimeSpan DelayMs { get; private set; }
+        // The delay between each animation frame in the sequence.
+        public TimeSpan Delay { get; private set; }
 
         /// <summary>
         /// Constructor for the animation class.
         /// </summary>
         /// <param name="animationFrames">The list of texture regions representing each animation frame.</param>
-        /// <param name="delayMs">The delay between showing each animation frame, in milliseconds.</param>
-        public Animation(List<TextureRegion> animationFrames, TimeSpan delayMs)
+        /// <param name="delay">The delay between showing each animation frame.</param>
+        public Animation(List<TextureRegion> animationFrames, TimeSpan delay)
         {
             // Set the animation frames and delay.
             AnimationFrames = animationFrames;
-            DelayMs = delayMs;
+            Delay = delay;
         }
     }
 }
