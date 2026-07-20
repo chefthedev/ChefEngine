@@ -18,11 +18,11 @@ namespace ChefEngine.Input
         /// </summary>
         public KeyboardInfo()
         {
-            // Set the previous state to an empty keyboard state initially.
-            PreviousState = new KeyboardState();
-
             // Set the current state to the current keyboard state.
             CurrentState = Keyboard.GetState();
+
+            // Set the previous state to the current keyboard state initially.
+            PreviousState = CurrentState;
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace ChefEngine.Input
         public bool IsKeyUp(Keys key)
         {
             // Perform the key up check.
-            return CurrentState.IsKeyDown(key);
+            return CurrentState.IsKeyUp(key);
         }
 
         /// <summary>

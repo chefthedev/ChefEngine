@@ -6,10 +6,10 @@
     public class InputManager
     {
         // The keyboard instance.
-        public KeyboardInfo Keyboard { get; set; }
+        public KeyboardInfo Keyboard { get; private set; }
 
         // The mouse instance.
-        public MouseInfo Mouse { get; set; }
+        public MouseInfo Mouse { get; private set; }
 
         /// <summary>
         /// Empty constructor for the InputManager class.

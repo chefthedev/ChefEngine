@@ -59,11 +59,11 @@ namespace ChefEngine.Input
         /// </summary>
         public MouseInfo()
         {
-            // Set the previous state to an empty mouse state initially.
-            PreviousState = new MouseState();
-
             // Set the current state to the current mouse state.
             CurrentState = Mouse.GetState();
+
+            // Set the previous state to the current mouse state initially.
+            PreviousState = CurrentState;
         }
 
         /// <summary>
