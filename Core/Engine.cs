@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ChefEngine.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -42,6 +43,10 @@ namespace ChefEngine.Core
 
         // ExitOnEscape flag for exit behavior, with a default value of true.
         public bool ExitOnEscape { get; set; } = true;
+
+        // Global list of entities.
+        // TODO: Replace with entity manager.
+        public List<Entity> Entities { get; set; }
 
         /// <summary>
         /// Constructor for the Engine class.
@@ -93,6 +98,9 @@ namespace ChefEngine.Core
 
             // Create the InputManager.
             Input = new InputManager();
+
+            // Initialize the entity list.
+            Entities = new List<Entity>();
         }
 
         protected override void Update(GameTime gameTime)
@@ -107,8 +115,35 @@ namespace ChefEngine.Core
                 Exit();
             }
 
+            // Update all the entities.
+            foreach (Entity entity in Entities)
+            {
+                entity.Update(gameTime);
+            }
+
             // Call the base class's Update method.
             base.Update(gameTime);
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            // Clear the screen with a salmon color.
+            GraphicsDevice.Clear(Color.Salmon);
+
+            // Begin the sprite batch to prepare for 2D rendering with point sampling for sharp pixel art.
+            SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+
+            // Draw all the entities.
+            foreach (Entity entity in Entities)
+            {
+                entity.Draw();
+            }
+
+            // End the sprite batch to finish 2D rendering.
+            SpriteBatch.End();
+
+            // Call the base class's Draw method.
+            base.Draw(gameTime);
         }
     }
 }

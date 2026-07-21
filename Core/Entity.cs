@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using ChefEngine.Physics;
+using Microsoft.Xna.Framework;
 
 namespace ChefEngine.Core
 {
@@ -7,8 +8,11 @@ namespace ChefEngine.Core
     /// </summary>
     public abstract class Entity
     {
-        // The entity's position
+        // The entity's position.
         public Vector2 Position { get; protected set; }
+
+        // The entity's collider.
+        public Collider Collider { get; protected set; }
 
         /// <summary>
         /// Updates the state of the entity.
