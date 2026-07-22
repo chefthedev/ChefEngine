@@ -46,6 +46,42 @@ namespace ChefEngine.Graphics
         }
 
         /// <summary>
+        /// Sets the origin to the center of the texture region.
+        /// </summary>
+        public void SetCenterOrigin()
+        {
+            // Center the origin.
+            Origin = new Vector2(TextureRegion.Width * 0.5f, TextureRegion.Height * 0.5f);
+        }
+
+        /// <summary>
+        /// Sets the origin to the top left of the texture region.
+        /// </summary>
+        public void SetTopLeftOrigin()
+        {
+            // Top left the origin.
+            Origin = Vector2.Zero;
+        }
+
+        /// <summary>
+        /// Sets the origin to a custom point of the texture region.
+        /// </summary>
+        public void SetCustomOrigin(float x, float y)
+        {
+            // Customize the origin.
+            Origin = new Vector2(x, y);
+        }
+
+        /// <summary>
+        /// Sets the origin to a custom point of the texture region.
+        /// </summary>
+        public void SetCustomOrigin(Vector2 origin)
+        {
+            // Customize the origin.
+            Origin = origin;
+        }
+
+        /// <summary>
         /// Submit the sprite for drawing to the current sprite batch.
         /// </summary>
         /// <param name="spriteBatch">The sprite batch to draw the sprite in.</param>

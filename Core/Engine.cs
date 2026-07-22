@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ChefEngine.Graphics;
 using ChefEngine.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace ChefEngine.Core
 {
@@ -43,6 +43,9 @@ namespace ChefEngine.Core
 
         // EntityManager for managing all entities.
         public EntityManager EntityManager { get; private set; }
+
+        // Camera for moving display of world.
+        public Camera Camera { get; private set; }
 
         // ExitOnEscape flag for exit behavior, with a default value of true.
         public bool ExitOnEscape { get; set; } = true;
@@ -100,6 +103,9 @@ namespace ChefEngine.Core
 
             // Create the EntityManager.
             EntityManager = new EntityManager();
+
+            // Create the Camera.
+            Camera = new Camera(GraphicsDevice.Viewport);
         }
 
         protected override void Update(GameTime gameTime)
@@ -126,8 +132,8 @@ namespace ChefEngine.Core
             // Clear the screen with a salmon color.
             GraphicsDevice.Clear(Color.Salmon);
 
-            // Begin the sprite batch to prepare for 2D rendering with point sampling for sharp pixel art.
-            SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+            // Begin the sprite batch to prepare for 2D rendering with point sampling for sharp pixel art and the camera transform.
+            SpriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Camera.Transform);
 
             // Draw all the entities.
             EntityManager.Draw();
