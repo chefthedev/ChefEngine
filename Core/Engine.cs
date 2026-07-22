@@ -41,12 +41,11 @@ namespace ChefEngine.Core
         // InputManager for unified input handling.
         public InputManager Input { get; private set; }
 
+        // EntityManager for managing all entities.
+        public EntityManager EntityManager { get; private set; }
+
         // ExitOnEscape flag for exit behavior, with a default value of true.
         public bool ExitOnEscape { get; set; } = true;
-
-        // Global list of entities.
-        // TODO: Replace with entity manager.
-        public List<Entity> Entities { get; set; }
 
         /// <summary>
         /// Constructor for the Engine class.
@@ -99,8 +98,8 @@ namespace ChefEngine.Core
             // Create the InputManager.
             Input = new InputManager();
 
-            // Initialize the entity list.
-            Entities = new List<Entity>();
+            // Create the EntityManager.
+            EntityManager = new EntityManager();
         }
 
         protected override void Update(GameTime gameTime)
@@ -116,10 +115,7 @@ namespace ChefEngine.Core
             }
 
             // Update all the entities.
-            foreach (Entity entity in Entities)
-            {
-                entity.Update(gameTime);
-            }
+            EntityManager.Update(gameTime);
 
             // Call the base class's Update method.
             base.Update(gameTime);
@@ -134,10 +130,7 @@ namespace ChefEngine.Core
             SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             // Draw all the entities.
-            foreach (Entity entity in Entities)
-            {
-                entity.Draw();
-            }
+            EntityManager.Draw();
 
             // End the sprite batch to finish 2D rendering.
             SpriteBatch.End();
