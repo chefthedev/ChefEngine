@@ -1,29 +1,28 @@
-﻿using Microsoft.Xna.Framework;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace ChefEngine.Core
+namespace ChefEngine.Entities
 {
     /// <summary>
-    /// EntityManager class for managing the list of entities.
+    /// EntityCollection class for storing a list of entities.
     /// </summary>
-    public class EntityManager
+    public class EntityCollection
     {
-        // List of all entities.
+        // List of entities.
         private List<Entity> _entities;
 
-        // List of entities to add to the global list.
+        // List of entities to add to the list.
         private readonly List<Entity> _entitiesToAdd;
 
-        // List of entities to remove from the global list.
+        // List of entities to remove from the list.
         private readonly List<Entity> _entitiesToRemove;
 
-        // Read only reference to the global entity list.
+        // Read only reference to the entity list.
         public IReadOnlyList<Entity> Entities => _entities;
 
         /// <summary>
-        /// Constructor for the EntityManager class.
+        /// Constructor for the EntityCollection class.
         /// </summary>
-        public EntityManager()
+        public EntityCollection()
         {
             // Initialize the lists.
             _entities = new List<Entity>();
@@ -62,18 +61,10 @@ namespace ChefEngine.Core
         }
 
         /// <summary>
-        /// Updates all entities and applies any pending additions and removals.
+        /// Applies all pending additions and removals to the entity list.
         /// </summary>
-        /// <param name="gameTime">The game time instance.</param>
-        public void Update(GameTime gameTime)
+        public void ApplyPendingChanges()
         {
-            // For each entity in the global list.
-            foreach (Entity entity in _entities)
-            {
-                // Update it.
-                entity.Update(gameTime);
-            }
-
             // For each entity scheduled for removal.
             foreach (Entity entity in _entitiesToRemove)
             {
@@ -85,19 +76,6 @@ namespace ChefEngine.Core
             // Add each entity scheduled for addition.
             _entities.AddRange(_entitiesToAdd);
             _entitiesToAdd.Clear();
-        }
-
-        /// <summary>
-        /// Submit each entity for drawing.
-        /// </summary>
-        public void Draw()
-        {
-            // For each entity in the global list.
-            foreach (Entity entity in _entities)
-            {
-                // Draw it.
-                entity.Draw();
-            }
         }
     }
 }

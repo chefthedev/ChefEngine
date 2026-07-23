@@ -1,5 +1,4 @@
-﻿using ChefEngine.Graphics;
-using ChefEngine.Input;
+﻿using ChefEngine.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -8,9 +7,9 @@ using System;
 namespace ChefEngine.Core
 {
     /// <summary>
-    /// Engine class for bootstrapping and managing the game engine.
+    /// Engine abstract class for bootstrapping and managing the game engine.
     /// </summary>
-    public class Engine : Game
+    public abstract class Engine : Game
     {
         // Singleton Engine instance.
         private static Engine _instance;
@@ -40,12 +39,6 @@ namespace ChefEngine.Core
 
         // InputManager for unified input handling.
         public InputManager Input { get; private set; }
-
-        // EntityManager for managing all entities.
-        public EntityManager EntityManager { get; private set; }
-
-        // Camera for moving display of world.
-        public Camera Camera { get; private set; }
 
         // ExitOnEscape flag for exit behavior, with a default value of true.
         public bool ExitOnEscape { get; set; } = true;
@@ -100,12 +93,6 @@ namespace ChefEngine.Core
 
             // Create the InputManager.
             Input = new InputManager();
-
-            // Create the EntityManager.
-            EntityManager = new EntityManager();
-
-            // Create the Camera.
-            Camera = new Camera(GraphicsDevice.Viewport);
         }
 
         protected override void Update(GameTime gameTime)
@@ -120,29 +107,35 @@ namespace ChefEngine.Core
                 Exit();
             }
 
-            // Update all the entities.
-            EntityManager.Update(gameTime);
+            // Update the game.
+            UpdateGame(gameTime);
 
             // Call the base class's Update method.
             base.Update(gameTime);
         }
 
+        /// <summary>
+        /// Updates the game.
+        /// </summary>
+        /// <param name="gameTime">The game time instance.</param>
+        protected abstract void UpdateGame(GameTime gameTime);
+
         protected override void Draw(GameTime gameTime)
         {
-            // Clear the screen with a salmon color.
-            GraphicsDevice.Clear(Color.Salmon);
+            // Clear the screen with a black color.
+            GraphicsDevice.Clear(Color.Black);
 
-            // Begin the sprite batch to prepare for 2D rendering with point sampling for sharp pixel art and the camera transform.
-            SpriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Camera.Transform);
-
-            // Draw all the entities.
-            EntityManager.Draw();
-
-            // End the sprite batch to finish 2D rendering.
-            SpriteBatch.End();
+            // Draw the game.
+            DrawGame(gameTime);
 
             // Call the base class's Draw method.
             base.Draw(gameTime);
         }
+
+        /// <summary>
+        /// Draws the game.
+        /// </summary>
+        /// <param name="gameTime">The game time instance.</param>
+        protected abstract void DrawGame(GameTime gameTime);
     }
 }

@@ -1,7 +1,8 @@
 ﻿using ChefEngine.Physics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace ChefEngine.Core
+namespace ChefEngine.Entities
 {
     /// <summary>
     /// Entity abstract class for defining generic entity objects.
@@ -23,6 +24,7 @@ namespace ChefEngine.Core
         /// <summary>
         /// Submits the entity for drawing on the screen.
         /// </summary>
-        public abstract void Draw();
+        /// <param name="spriteBatch">The sprite batch to draw the entity in.</param>
+        public abstract void Draw(SpriteBatch spriteBatch);
     }
 }

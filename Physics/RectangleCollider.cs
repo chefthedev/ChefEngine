@@ -1,4 +1,4 @@
-﻿using ChefEngine.Core;
+﻿using ChefEngine.Entities;
 using ChefEngine.Geometry;
 
 namespace ChefEngine.Physics

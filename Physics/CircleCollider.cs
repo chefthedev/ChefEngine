@@ -1,5 +1,5 @@
 ﻿using ChefEngine.Geometry;
-using ChefEngine.Core;
+using ChefEngine.Entities;
 
 namespace ChefEngine.Physics
 {
