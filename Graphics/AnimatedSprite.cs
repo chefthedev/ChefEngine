@@ -15,7 +15,7 @@ namespace ChefEngine.Graphics
         private TimeSpan _timeSinceAnimationFrameChange;
 
         // The current animation.
-        private Animation _animation;
+        private Animation _animation = null!;
 
         // Animation wrapper property.
         public Animation Animation

@@ -48,11 +48,18 @@ namespace ChefEngine.Graphics
         /// Gets a texture region by name from the atlas.
         /// </summary>
         /// <param name="name">The name of the texture region.</param>
-        /// <returns>The desired texture region, or null if not found.</returns>
+        /// <returns>The desired texture region.</returns>
         public TextureRegion GetRegion(string name)
         {
-            // Return the texture region if it exists, otherwise return null.
-            return _textureRegions.GetValueOrDefault(name);
+            // Try getting the texture region.
+            if (!_textureRegions.TryGetValue(name, out TextureRegion? region))
+            {
+                // Throw an error if it wasn't found.
+                throw new KeyNotFoundException($"Texture region {name} was not found.");
+            }
+
+            // Return the texture region.
+            return region;
         }
 
         /// <summary>
@@ -89,11 +96,18 @@ namespace ChefEngine.Graphics
         /// Gets an animation by name from the atlas.
         /// </summary>
         /// <param name="name">The name of the animation.</param>
-        /// <returns>The desired animation, or null if not found.</returns>
+        /// <returns>The desired animation.</returns>
         public Animation GetAnimation(string name)
         {
-            // Return the animation if it exists, otherwise return null.
-            return _animations.GetValueOrDefault(name);
+            // Try getting the animation.
+            if (!_animations.TryGetValue(name, out Animation? animation))
+            {
+                // Throw an error if it wasn't found.
+                throw new KeyNotFoundException($"Animation {name} was not found.");
+            }
+
+            // Return the animation.
+            return animation;
         }
 
         /// <summary>

@@ -12,6 +12,12 @@ namespace ChefEngine.Graphics
     /// </summary>
     public static class TextureAtlasLoader
     {
+        // Re-usable json serializer options.
+        private static readonly JsonSerializerOptions _jsonOptions = new()
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
         /// <summary>
         /// Static method for loading a texture atlas in from a json file.
         /// </summary>
@@ -26,14 +32,15 @@ namespace ChefEngine.Graphics
             string json = File.ReadAllText(filePath);
             TextureAtlasData data = JsonSerializer.Deserialize<TextureAtlasData>(
                 json,
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
-            );
+                _jsonOptions
+            )
+            ?? throw new InvalidDataException($"Failed to deserialize texture atlas {fileName}.");
 
             // Load the referenced texture using the content manager.
             Texture2D texture = Engine.Instance.Content.Load<Texture2D>(data.Texture);
 
             // Create the texture atlas instance.
-            TextureAtlas atlas = new TextureAtlas(texture);
+            TextureAtlas atlas = new(texture);
 
             // For each texture region in the atlas file.
             foreach (TextureAtlasRegionData region in data.Regions)
@@ -46,7 +53,7 @@ namespace ChefEngine.Graphics
             foreach (TextureAtlasAnimationData animation in data.Animations)
             {
                 // Initialize the list of animation frames.
-                List<TextureRegion> animationFrames = new List<TextureRegion>();
+                List<TextureRegion> animationFrames = [];
                 
                 // For each animation frame.
                 foreach (string frame in  animation.Frames)
@@ -69,9 +76,9 @@ namespace ChefEngine.Graphics
     /// </summary>
     internal class TextureAtlasData
     {
-        public string Texture { get; set; }
-        public List<TextureAtlasRegionData> Regions { get; set; }
-        public List<TextureAtlasAnimationData> Animations { get; set; }
+        public required string Texture { get; set; }
+        public required List<TextureAtlasRegionData> Regions { get; set; }
+        public required List<TextureAtlasAnimationData> Animations { get; set; }
     }
 
     /// <summary>
@@ -79,7 +86,7 @@ namespace ChefEngine.Graphics
     /// </summary>
     internal class TextureAtlasRegionData
     {
-        public string Name { get; set; }
+        public required string Name { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
         public int Width { get; set; }
@@ -91,8 +98,8 @@ namespace ChefEngine.Graphics
     /// </summary>
     internal class TextureAtlasAnimationData
     {
-        public string Name { get; set; }
+        public required string Name { get; set; }
         public float Delay { get; set; }
-        public List<string> Frames { get; set; }
+        public required List<string> Frames { get; set; }
     }
 }

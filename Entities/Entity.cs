@@ -13,7 +13,7 @@ namespace ChefEngine.Entities
         public Vector2 Position { get; protected set; }
 
         // The entity's collider.
-        public Collider Collider { get; protected set; }
+        public Collider? Collider { get; protected set; }
 
         /// <summary>
         /// Updates the state of the entity.

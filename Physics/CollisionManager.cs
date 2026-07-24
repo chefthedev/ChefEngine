@@ -62,7 +62,7 @@ namespace ChefEngine.Physics
             }
 
             // If there is a collision test for the type bindings.
-            if (_collisionTests.TryGetValue((a.GetType(), b.GetType()), out CollisionTest test))
+            if (_collisionTests.TryGetValue((a.GetType(), b.GetType()), out CollisionTest? test))
             {
                 // Call the collision test.
                 return test(a, b);

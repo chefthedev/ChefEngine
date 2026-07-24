@@ -12,7 +12,7 @@ namespace ChefEngine.Core
     public abstract class Engine : Game
     {
         // Singleton Engine instance.
-        private static Engine _instance;
+        private static Engine? _instance;
 
         // Public property for accessing the singleton Engine instance.
         public static Engine Instance
@@ -35,10 +35,10 @@ namespace ChefEngine.Core
         public GraphicsDeviceManager Graphics { get; private set; }
 
         // SpriteBatch for optimized 2D rendering.
-        public SpriteBatch SpriteBatch { get; private set; }
+        public SpriteBatch SpriteBatch { get; private set; } = null!;
 
         // InputManager for unified input handling.
-        public InputManager Input { get; private set; }
+        public InputManager Input { get; private set; } = null!;
 
         // ExitOnEscape flag for exit behavior, with a default value of true.
         public bool ExitOnEscape { get; set; } = true;
