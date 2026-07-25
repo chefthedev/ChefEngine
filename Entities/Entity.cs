@@ -10,7 +10,10 @@ namespace ChefEngine.Entities
     public abstract class Entity
     {
         // The entity's position.
-        public Vector2 Position { get; protected set; }
+        public Vector2 Position { get; set; }
+
+        // The entity's velocity.
+        public Vector2 Velocity { get; set; } = Vector2.Zero;
 
         // The entity's collider.
         public Collider? Collider { get; protected set; }
