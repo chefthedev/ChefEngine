@@ -59,13 +59,13 @@ namespace ChefEngine.Core
                 throw new InvalidOperationException("The Engine class is a singleton. Only one instance is allowed.");
             }
 
-            // Create a new GraphicsDeviceManager.
-            Graphics = new GraphicsDeviceManager(this);
-
-            // Set the graphics defaults.
-            Graphics.PreferredBackBufferWidth = width;
-            Graphics.PreferredBackBufferHeight = height;
-            Graphics.IsFullScreen = isFullscreen;
+            // Create a new GraphicsDeviceManager with the defaults.
+            Graphics = new(this)
+            {
+                PreferredBackBufferWidth = width,
+                PreferredBackBufferHeight = height,
+                IsFullScreen = isFullscreen
+            };
 
             // Apply the graphics presentation changes.
             Graphics.ApplyChanges();

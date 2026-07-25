@@ -18,25 +18,25 @@ namespace ChefEngine.Geometry
         public float Radius;
 
         // The diameter of the circle.
-        public float Diameter => Radius * 2;
+        public readonly float Diameter => Radius * 2;
 
         // The circumference of the circle.
-        public float Circumference => 2 * MathF.PI * Radius;
+        public readonly float Circumference => 2 * MathF.PI * Radius;
 
         // The x coordinate of the left-most point.
-        public float Left => X - Radius;
+        public readonly float Left => X - Radius;
 
         // The x coordinate of the right-most point.
-        public float Right => X + Radius;
+        public readonly float Right => X + Radius;
 
         // The y coordinate of the top-most point.
-        public float Top => Y - Radius;
+        public readonly float Top => Y - Radius;
 
         // The y coordinate of the bottom-most point.
-        public float Bottom => Y + Radius;
+        public readonly float Bottom => Y + Radius;
 
         // The center of the circle.
-        public Vector2 Center => new Vector2(X, Y);
+        public readonly Vector2 Center => new(X, Y);
 
         /// <summary>
         /// Constructor for the CircleF struct.
