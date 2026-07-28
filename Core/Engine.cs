@@ -1,4 +1,5 @@
 ﻿using ChefEngine.Input;
+using ChefEngine.Rendering;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -90,6 +91,9 @@ namespace ChefEngine.Core
 
             // Create the SpriteBatch instance.
             SpriteBatch = new SpriteBatch(GraphicsDevice);
+
+            // Initialize the DebugRenderer.
+            DebugRenderer.Initialize(GraphicsDevice);
 
             // Create the InputManager.
             Input = new InputManager();

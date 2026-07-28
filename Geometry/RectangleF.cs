@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace ChefEngine.Geometry
 {
@@ -31,6 +32,9 @@ namespace ChefEngine.Geometry
         // The y coordinate of the bottom side.
         public float Bottom => Y + Height;
 
+        // The center of the rectangle.
+        public Vector2 Center => new Vector2((Left + Right) * 0.5f, (Top + Bottom) * 0.5f);
+
         // The position of the top-left corner.
         public Vector2 Position => new Vector2(X, Y);
 
@@ -51,6 +55,17 @@ namespace ChefEngine.Geometry
             Y = y;
             Width = width;
             Height = height;
+        }
+
+        /// <summary>
+        /// Finds the closest point on the rectangle to the provided point in space.
+        /// </summary>
+        /// <param name="point">The target point in space.</param>
+        /// <returns>The closest point on the rectangle to point.</returns>
+        public Vector2 ClosestPoint(Vector2 point)
+        {
+            // Calculate the closest point.
+            return new Vector2(Math.Clamp(point.X, Left, Right), Math.Clamp(point.Y, Top, Bottom));
         }
     }
 }

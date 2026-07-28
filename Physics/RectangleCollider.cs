@@ -1,5 +1,8 @@
 ﻿using ChefEngine.Entities;
 using ChefEngine.Geometry;
+using ChefEngine.Rendering;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace ChefEngine.Physics
 {
@@ -34,6 +37,12 @@ namespace ChefEngine.Physics
         {
             // Set the local bounds of the rectangular collider.
             LocalBounds = localBounds;
+        }
+
+        public override void DebugDraw(SpriteBatch spriteBatch, Color color, int thickness = 1)
+        {
+            // Draw the outline of the rectangular collider.
+            DebugRenderer.DrawRectangleFOutline(spriteBatch, Bounds, color, thickness);
         }
     }
 }

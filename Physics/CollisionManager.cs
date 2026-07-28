@@ -23,21 +23,6 @@ namespace ChefEngine.Physics
             // Initialize the collision tests dictionary with each binding.
             _collisionTests = new Dictionary<(Type, Type), CollisionTest>()
             {
-                // Circle to Circle.
-                {
-                    (typeof(CircleCollider), typeof(CircleCollider)),
-                    (a, b) => CircleCircle((CircleCollider)a, (CircleCollider)b)
-                },
-                // Circle to Rectangle.
-                {
-                    (typeof(CircleCollider), typeof(RectangleCollider)),
-                    (a, b) => CircleRectangle((CircleCollider)a, (RectangleCollider)b)
-                },
-                // Rectangle to Circle.
-                {
-                    (typeof(RectangleCollider), typeof(CircleCollider)),
-                    (a, b) => RectangleCircle((RectangleCollider)a, (CircleCollider)b)
-                },
                 // Rectangle to Rectangle.
                 {
                     (typeof(RectangleCollider), typeof(RectangleCollider)),
@@ -73,52 +58,6 @@ namespace ChefEngine.Physics
         }
 
         /// <summary>
-        /// Determine if two circles are colliding.
-        /// </summary>
-        /// <param name="a">The first circle.</param>
-        /// <param name="b">The second circle.</param>
-        /// <returns>Collision result of the circles.</returns>
-        private static CollisionResult CircleCircle(CircleCollider a, CircleCollider b)
-        {
-            // Perform the calculations.
-            float distanceSquared = Vector2.DistanceSquared(a.Bounds.Center, b.Bounds.Center);
-            float radiusSum = a.Bounds.Radius + b.Bounds.Radius;
-            bool hasCollision = distanceSquared <= radiusSum * radiusSum;
-            
-            // Return their collision result.
-            return new CollisionResult(hasCollision);
-        }
-
-        /// <summary>
-        /// Determine if a circle and rectangle are colliding.
-        /// </summary>
-        /// <param name="a">The circle.</param>
-        /// <param name="b">The rectangle.</param>
-        /// <returns>Collision result of the circle and rectangle.</returns>
-        private static CollisionResult CircleRectangle(CircleCollider a, RectangleCollider b)
-        {
-            // Perform the calculations.
-            float distanceX = MathF.Max(MathF.Max(b.Bounds.Left - a.Bounds.X, 0), a.Bounds.X - b.Bounds.Right);
-            float distanceY = MathF.Max(MathF.Max(b.Bounds.Top - a.Bounds.Y, 0), a.Bounds.Y - b.Bounds.Bottom);
-            bool hasCollision = distanceX * distanceX + distanceY * distanceY <= a.Bounds.Radius * a.Bounds.Radius;
-
-            // Return their collision result.
-            return new CollisionResult(hasCollision);
-        }
-
-        /// <summary>
-        /// Determine if a rectangle and circle are colliding.
-        /// </summary>
-        /// <param name="a">The rectangle.</param>
-        /// <param name="b">The circle.</param>
-        /// <returns>Collision result of the rectangle and circle.</returns>
-        private static CollisionResult RectangleCircle(RectangleCollider a, CircleCollider b)
-        {
-            // Return their collision result.
-            return CircleRectangle(b, a);
-        }
-
-        /// <summary>
         /// Determine if two rectangles are colliding.
         /// </summary>
         /// <param name="a">The first rectangle.</param>
@@ -127,13 +66,67 @@ namespace ChefEngine.Physics
         private static CollisionResult RectangleRectangle(RectangleCollider a, RectangleCollider b)
         {
             // Perform the calculations.
-            bool hasCollision = a.Bounds.Right >= b.Bounds.Left
-                && b.Bounds.Right >= a.Bounds.Left
-                && a.Bounds.Bottom >= b.Bounds.Top
-                && b.Bounds.Bottom >= a.Bounds.Top;
+            bool hasCollision = a.Bounds.Right > b.Bounds.Left
+                && b.Bounds.Right > a.Bounds.Left
+                && a.Bounds.Bottom > b.Bounds.Top
+                && b.Bounds.Bottom > a.Bounds.Top;
 
-            // Return their collision result.
-            return new CollisionResult(hasCollision);
+            // If there is a collision.
+            if (hasCollision)
+            {
+                // Initialize the result metadata.
+                Vector2 normal;
+                float penetrationDepth;
+
+                // Calculate the x and y overlap.
+                float xOverlap = MathF.Min(a.Bounds.Right, b.Bounds.Right) - MathF.Max(a.Bounds.Left, b.Bounds.Left);
+                float yOverlap = MathF.Min(a.Bounds.Bottom, b.Bounds.Bottom) - MathF.Max(a.Bounds.Top, b.Bounds.Top);
+
+                // If the x overlap is less than the y overlap.
+                if (xOverlap < yOverlap)
+                {
+                    // Determine the direction of the collision.
+                    float directionX = MathF.Sign(b.Bounds.Center.X - a.Bounds.Center.X);
+                    
+                    // If the two rectangles have the same x center.
+                    if (directionX == 0.0f)
+                    {
+                        // Overlapping centers provide no meaningful collision direction.
+                        // Choose a deterministic positive direction.
+                        directionX = 1.0f;
+                    }
+                    
+                    // Set the normal and penetration depth values.
+                    normal = new Vector2(directionX, 0.0f);
+                    penetrationDepth = xOverlap;
+                }
+                // Else, the y overlap is less or equal to the x overlap.
+                else
+                {
+                    // Determine the direction of the collision.
+                    float directionY = MathF.Sign(b.Bounds.Center.Y - a.Bounds.Center.Y);
+
+                    // If the two rectangles have the same y center.
+                    if (directionY == 0.0f)
+                    {
+                        // Overlapping centers provide no meaningful collision direction.
+                        // Choose a deterministic positive direction.
+                        directionY = 1.0f;
+                    }
+
+                    // Set the normal and penetration depth values.
+                    normal = new Vector2(0.0f, directionY);
+                    penetrationDepth = yOverlap;
+                }
+
+                // Return the collision result.
+                return new(true, normal, penetrationDepth);
+            }
+            else
+            {
+                // Return a none collision result.
+                return CollisionResult.None;
+            }
         }
     }
 }

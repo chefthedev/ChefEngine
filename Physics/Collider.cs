@@ -1,4 +1,6 @@
 ﻿using ChefEngine.Entities;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace ChefEngine.Physics
 {
@@ -22,5 +24,13 @@ namespace ChefEngine.Physics
             // Set the owner entity reference.
             Owner = owner;
         }
+
+        /// <summary>
+        /// Draws the collider bounds for debugging.
+        /// </summary>
+        /// <param name="spriteBatch">The sprite batch to draw the collider in.</param>
+        /// <param name="color">The color to draw the collider in.</param>
+        /// <param name="thickness">The thickness to draw the collider with.</param>
+        public abstract void DebugDraw(SpriteBatch spriteBatch, Color color, int thickness = 1);
     }
 }

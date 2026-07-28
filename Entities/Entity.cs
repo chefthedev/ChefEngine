@@ -15,6 +15,9 @@ namespace ChefEngine.Entities
         // The entity's velocity.
         public Vector2 Velocity { get; set; } = Vector2.Zero;
 
+        // The entity's gravity affect flag.
+        public bool IsAffectedByGravity { get; set; } = false;
+
         // The entity's collider.
         public Collider? Collider { get; protected set; }
 
