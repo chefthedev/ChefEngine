@@ -9,28 +9,28 @@ namespace ChefEngine.Entities
     /// </summary>
     public abstract class Entity
     {
-        // The entity's position.
+        // X,Y position of the entity in space.
         public Vector2 Position { get; set; }
 
-        // The entity's velocity.
+        // X,Y velocity of the entity in space.
         public Vector2 Velocity { get; set; } = Vector2.Zero;
 
-        // The entity's gravity affect flag.
+        // Whether the entity is affected by gravity.
         public bool IsAffectedByGravity { get; set; } = false;
 
-        // The entity's collider.
+        // Defines collision bounds of the entity.
         public Collider? Collider { get; protected set; }
 
         /// <summary>
         /// Updates the state of the entity.
         /// </summary>
-        /// <param name="gameTime">The game time instance.</param>
+        /// <param name="gameTime">Game time instance.</param>
         public abstract void Update(GameTime gameTime);
 
         /// <summary>
         /// Submits the entity for drawing on the screen.
         /// </summary>
-        /// <param name="spriteBatch">The sprite batch to draw the entity in.</param>
+        /// <param name="spriteBatch">Sprite batch to draw the entity in.</param>
         public abstract void Draw(SpriteBatch spriteBatch);
     }
 }

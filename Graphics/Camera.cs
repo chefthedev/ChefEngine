@@ -8,18 +8,18 @@ namespace ChefEngine.Graphics
     /// </summary>
     public class Camera
     {
-        // The position of the camera.
+        // X,Y position in space.
         public Vector2 Position { get; set; }
 
-        // The rotation of the camera, in radians.
+        // Rotation, in radians.
         public float Rotation { get; set; }
 
-        // The zoom multiplier of the camera.
+        // Zoom multiplier.
         public float Zoom { get; set; }
 
         public Viewport Viewport { get; private set; }
 
-        // The transform matrix of the camera.
+        // Matrix transformation based on camera properties.
         public Matrix Transform
         {
             get
@@ -43,7 +43,7 @@ namespace ChefEngine.Graphics
         /// <summary>
         /// Constructor for the Camera class.
         /// </summary>
-        /// <param name="viewport">The viewport.</param>
+        /// <param name="viewport">Viewport of the screen.</param>
         public Camera(Viewport viewport)
         {
             // Initialize the default camera values.
@@ -58,7 +58,7 @@ namespace ChefEngine.Graphics
         /// <summary>
         /// Resizes the camera based on the new viewport.
         /// </summary>
-        /// <param name="viewport">The updated viewport.</param>
+        /// <param name="viewport">Updated viewport.</param>
         public void Resize(Viewport viewport)
         {
             // Set the updated viewport.

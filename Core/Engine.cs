@@ -32,24 +32,24 @@ namespace ChefEngine.Core
             }
         }
 
-        // GraphicsDeviceManager for interfacing and managing the graphics hardware.
+        // Interfaces and manages the graphics hardware.
         public GraphicsDeviceManager Graphics { get; private set; }
 
-        // SpriteBatch for optimized 2D rendering.
+        // Batches sprite draws for optimized 2D rendering.
         public SpriteBatch SpriteBatch { get; private set; } = null!;
 
-        // InputManager for unified input handling.
+        // Unified input handling service.
         public InputManager Input { get; private set; } = null!;
 
-        // ExitOnEscape flag for exit behavior, with a default value of true.
+        // Flag for exit behavior, with a default value of true.
         public bool ExitOnEscape { get; set; } = true;
 
         /// <summary>
         /// Constructor for the Engine class.
         /// </summary>
-        /// <param name="title">The title to display in the title bar of the game window.</param>
-        /// <param name="width">The initial width of the game window.</param>
-        /// <param name="height">The initial height of the game window.</param>
+        /// <param name="title">Title to display in the title bar of the game window.</param>
+        /// <param name="width">Initial width of the game window.</param>
+        /// <param name="height">Initial height of the game window.</param>
         /// <param name="isFullscreen">Indicates whether to start the game in fullscreen mode or not.</param>
         public Engine(string title, int width, int height, bool isFullscreen)
         {
@@ -121,7 +121,7 @@ namespace ChefEngine.Core
         /// <summary>
         /// Updates the game.
         /// </summary>
-        /// <param name="gameTime">The game time instance.</param>
+        /// <param name="gameTime">Game time instance.</param>
         protected abstract void UpdateGame(GameTime gameTime);
 
         protected override void Draw(GameTime gameTime)
@@ -139,7 +139,7 @@ namespace ChefEngine.Core
         /// <summary>
         /// Draws the game.
         /// </summary>
-        /// <param name="gameTime">The game time instance.</param>
+        /// <param name="gameTime">Game time instance.</param>
         protected abstract void DrawGame(GameTime gameTime);
     }
 }

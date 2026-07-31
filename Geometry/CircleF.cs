@@ -8,42 +8,42 @@ namespace ChefEngine.Geometry
     /// </summary>
     public struct CircleF
     {
-        // The x coordinate of the center.
+        // X coordinate of the center.
         public float X;
 
-        // The y coordinate of the center.
+        // Y coordinate of the center.
         public float Y;
 
-        // The radius of the circle.
+        // Distance from the center to the edge.
         public float Radius;
 
-        // The diameter of the circle.
+        // Distance across the width.
         public readonly float Diameter => Radius * 2;
 
-        // The circumference of the circle.
+        // Distance around the edge.
         public readonly float Circumference => 2 * MathF.PI * Radius;
 
-        // The x coordinate of the left-most point.
+        // X coordinate of the left-most point.
         public readonly float Left => X - Radius;
 
-        // The x coordinate of the right-most point.
+        // X coordinate of the right-most point.
         public readonly float Right => X + Radius;
 
-        // The y coordinate of the top-most point.
+        // Y coordinate of the top-most point.
         public readonly float Top => Y - Radius;
 
-        // The y coordinate of the bottom-most point.
+        // Y coordinate of the bottom-most point.
         public readonly float Bottom => Y + Radius;
 
-        // The center of the circle.
+        // X,Y position of the center.
         public readonly Vector2 Center => new(X, Y);
 
         /// <summary>
         /// Constructor for the CircleF struct.
         /// </summary>
-        /// <param name="x">The x coordinate of the center.</param>
-        /// <param name="y">The y coordinate of the center.</param>
-        /// <param name="radius">The radius of the circle.</param>
+        /// <param name="x">X coordinate of the center.</param>
+        /// <param name="y">Y coordinate of the center.</param>
+        /// <param name="radius">Radius of the circle.</param>
         public CircleF(float x, float y, float radius)
         {
             // Set the properties of the circle.

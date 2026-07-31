@@ -21,7 +21,7 @@ namespace ChefEngine.Graphics
         /// <summary>
         /// Static method for loading a texture atlas in from a json file.
         /// </summary>
-        /// <param name="fileName">The file name of the json file.</param>
+        /// <param name="fileName">File name of the json file.</param>
         /// <returns>TextureAtlas object loaded from the provided file.</returns>
         public static TextureAtlas Load(string fileName)
         {

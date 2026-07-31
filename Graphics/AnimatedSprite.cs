@@ -8,13 +8,13 @@ namespace ChefEngine.Graphics
     /// </summary>
     public class AnimatedSprite : Sprite
     {
-        // The current animation frame.
+        // Current animation frame.
         private int _animationFrame;
 
-        // The time since the last animation frame change.
+        // Time since the last animation frame change.
         private TimeSpan _timeSinceAnimationFrameChange;
 
-        // The current animation.
+        // Current animation.
         private Animation _animation = null!;
 
         // Animation wrapper property.
@@ -34,7 +34,7 @@ namespace ChefEngine.Graphics
         /// <summary>
         /// Constructor for the animated sprite class.
         /// </summary>
-        /// <param name="animation">The initial animation to load into the sprite.</param>
+        /// <param name="animation">Initial animation to load into the sprite.</param>
         public AnimatedSprite(Animation animation) : base(animation.AnimationFrames[0])
         {
             // Set the current animation.
@@ -44,7 +44,7 @@ namespace ChefEngine.Graphics
         /// <summary>
         /// Updates the state of the animated sprite.
         /// </summary>
-        /// <param name="gameTime">The game time instance.</param>
+        /// <param name="gameTime">Game time instance.</param>
         public void Update(GameTime gameTime)
         {
             // Add the elapsed game time to the time since animation frame change.

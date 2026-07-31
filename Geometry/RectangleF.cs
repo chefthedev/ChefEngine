@@ -8,46 +8,46 @@ namespace ChefEngine.Geometry
     /// </summary>
     public struct RectangleF
     {
-        // The x coordinate of the top-left corner.
+        // X coordinate of the top-left corner.
         public float X { get; set; }
 
-        // The y coordinate of the top-left corner.
+        // Y coordinate of the top-left corner.
         public float Y;
 
-        // The width of the rectangle.
+        // Distance from left to right.
         public float Width;
 
-        // The height of the rectangle.
+        // Distance from top to bottom.
         public float Height;
 
-        // The x coordinate of the left side.
+        // X coordinate of the left-most point.
         public float Left => X;
 
-        // The x coordinate of the right side.
+        // X coordinate of the right-most point.
         public float Right => X + Width;
 
-        // The y coordinate of the top side.
+        // Y coordinate of the top-most point.
         public float Top => Y;
 
-        // The y coordinate of the bottom side.
+        // Y coordinate of the bottom-most point.
         public float Bottom => Y + Height;
 
-        // The center of the rectangle.
+        // X,Y position of the center.
         public Vector2 Center => new Vector2((Left + Right) * 0.5f, (Top + Bottom) * 0.5f);
 
-        // The position of the top-left corner.
+        // X,Y position of the top-left corner.
         public Vector2 Position => new Vector2(X, Y);
 
-        // The size of the rectangle.
+        // X,Y size of the rectangle.
         public Vector2 Size => new Vector2(Width, Height);
 
         /// <summary>
         /// Constructor for the RectangleF struct.
         /// </summary>
-        /// <param name="x">The x coordinate of the top-left corner.</param>
-        /// <param name="y">The y coordinate of the top-left corner.</param>
-        /// <param name="width">The width of the rectangle.</param>
-        /// <param name="height">The height of the rectangle.</param>
+        /// <param name="x">X coordinate of the top-left corner.</param>
+        /// <param name="y">Y coordinate of the top-left corner.</param>
+        /// <param name="width">Width of the rectangle.</param>
+        /// <param name="height">Height of the rectangle.</param>
         public RectangleF(float x, float y, float width, float height)
         {
             // Set the properties of the rectangle.
@@ -61,7 +61,7 @@ namespace ChefEngine.Geometry
         /// Finds the closest point on the rectangle to the provided point in space.
         /// </summary>
         /// <param name="point">The target point in space.</param>
-        /// <returns>The closest point on the rectangle to point.</returns>
+        /// <returns>Closest point on the rectangle to point.</returns>
         public Vector2 ClosestPoint(Vector2 point)
         {
             // Calculate the closest point.

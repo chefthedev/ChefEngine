@@ -7,16 +7,16 @@ namespace ChefEngine.Entities
     /// </summary>
     public class EntityCollection
     {
-        // List of entities.
+        // List of entities backing the collection.
         private List<Entity> _entities;
 
-        // List of entities to add to the list.
+        // Entities to add to the collection.
         private readonly List<Entity> _entitiesToAdd;
 
-        // List of entities to remove from the list.
+        // Entities to remove from the collection.
         private readonly List<Entity> _entitiesToRemove;
 
-        // Read only reference to the entity list.
+        // Read only reference to the list of entities.
         public IReadOnlyList<Entity> Entities => _entities;
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace ChefEngine.Entities
         /// <summary>
         /// Schedule an entity to be added.
         /// </summary>
-        /// <param name="entity">The entity to add.</param>
+        /// <param name="entity">Entity to add.</param>
         public void Add(Entity entity)
         {
             // Schedule the add.
@@ -43,7 +43,7 @@ namespace ChefEngine.Entities
         /// <summary>
         /// Schedule a range of entities to be added.
         /// </summary>
-        /// <param name="entities">The range of entities.</param>
+        /// <param name="entities">Range of entities.</param>
         public void AddRange(IEnumerable<Entity> entities)
         {
             // Schedule the add range.
@@ -53,7 +53,7 @@ namespace ChefEngine.Entities
         /// <summary>
         /// Schedule an entity to be removed.
         /// </summary>
-        /// <param name="entity">The entity to remove.</param>
+        /// <param name="entity">Entity to remove.</param>
         public void Remove(Entity entity)
         {
             // Schedule the remove.

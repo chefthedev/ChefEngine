@@ -8,37 +8,37 @@ namespace ChefEngine.Graphics
     /// </summary>
     public class Sprite
     {
-        // The overall texture region being referenced by the sprite.
+        // Overall texture region being referenced by the sprite.
         public TextureRegion TextureRegion { get; protected set; }
 
-        // The color mask of the sprite.
+        // Masking of color, with a default of white (transparent).
         public Color Color { get; set; } = Color.White;
 
-        // The rotation of the sprite.
+        // Rotation, in radians.
         public float Rotation { get; set; } = 0.0f;
 
-        // The origin of the sprite based on the texture region.
+        // X,Y position of the origin, based on the texture region.
         public Vector2 Origin { get; set; } = Vector2.Zero;
 
-        // The scale of the sprite.
+        // Scaling factor.
         public Vector2 Scale { get; set; } = Vector2.One;
 
-        // The sprite effects applied to the sprite.
+        // Sprite visual options.
         public SpriteEffects SpriteEffects { get; set; } = SpriteEffects.None;
 
-        // The layer depth of the sprite.
+        // Which layer to draw the sprite on.
         public float LayerDepth { get; set; } = 0.0f;
 
-        // The width of the sprite, including scaling.
+        // Distance from left to right, including scaling.
         public float Width => TextureRegion.Width * Scale.X;
 
-        // The height of the sprite, including scaling.
+        // Distance from top to bottom, including scaling.
         public float Height => TextureRegion.Height * Scale.Y;
 
         /// <summary>
         /// Constructor for the Sprite class.
         /// </summary>
-        /// <param name="textureRegion">The overall source texture region to set.</param>
+        /// <param name="textureRegion">Overall source texture region to set.</param>
         public Sprite(TextureRegion textureRegion)
         {
             // Set the overall texture region for this sprite.
@@ -84,8 +84,8 @@ namespace ChefEngine.Graphics
         /// <summary>
         /// Submit the sprite for drawing to the current sprite batch.
         /// </summary>
-        /// <param name="spriteBatch">The sprite batch to draw the sprite in.</param>
-        /// <param name="position">The position to draw the sprite at, based on it's origin.</param>
+        /// <param name="spriteBatch">Sprite batch to draw the sprite in.</param>
+        /// <param name="position">Position to draw the sprite at, based on it's origin.</param>
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
             // Draw the sprite using the provided parameters and the sprite's properties.
