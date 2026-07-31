@@ -21,25 +21,25 @@ namespace ChefEngine.Geometry
         public float Height;
 
         // X coordinate of the left-most point.
-        public float Left => X;
+        public readonly float Left => X;
 
         // X coordinate of the right-most point.
-        public float Right => X + Width;
+        public readonly float Right => X + Width;
 
         // Y coordinate of the top-most point.
-        public float Top => Y;
+        public readonly float Top => Y;
 
         // Y coordinate of the bottom-most point.
-        public float Bottom => Y + Height;
+        public readonly float Bottom => Y + Height;
 
         // X,Y position of the center.
-        public Vector2 Center => new Vector2((Left + Right) * 0.5f, (Top + Bottom) * 0.5f);
+        public readonly Vector2 Center => new((Left + Right) * 0.5f, (Top + Bottom) * 0.5f);
 
         // X,Y position of the top-left corner.
-        public Vector2 Position => new Vector2(X, Y);
+        public readonly Vector2 Position => new(X, Y);
 
         // X,Y size of the rectangle.
-        public Vector2 Size => new Vector2(Width, Height);
+        public readonly Vector2 Size => new(Width, Height);
 
         /// <summary>
         /// Constructor for the RectangleF struct.

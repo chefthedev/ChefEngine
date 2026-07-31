@@ -8,7 +8,7 @@ namespace ChefEngine.Entities
     public class EntityCollection
     {
         // List of entities backing the collection.
-        private List<Entity> _entities;
+        private readonly List<Entity> _entities;
 
         // Entities to add to the collection.
         private readonly List<Entity> _entitiesToAdd;
@@ -25,9 +25,9 @@ namespace ChefEngine.Entities
         public EntityCollection()
         {
             // Initialize the lists.
-            _entities = new List<Entity>();
-            _entitiesToAdd = new List<Entity>();
-            _entitiesToRemove = new List<Entity>();
+            _entities = [];
+            _entitiesToAdd = [];
+            _entitiesToRemove = [];
         }
 
         /// <summary>
