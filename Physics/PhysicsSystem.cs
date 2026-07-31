@@ -9,7 +9,7 @@ namespace ChefEngine.Physics
     /// </summary>
     public class PhysicsSystem
     {
-        // The gravity acceleration value of the physics system.
+        // Acceleration caused by gravity.
         public Vector2 GravityAcceleration { get; private set; }
 
         /// <summary>
@@ -25,8 +25,8 @@ namespace ChefEngine.Physics
         /// <summary>
         /// Updates the system to simulate physics.
         /// </summary>
-        /// <param name="gameTime">The game time instance.</param>
-        /// <param name="entityCollection">The entities to simulate physics on.</param>
+        /// <param name="gameTime">Game time instance.</param>
+        /// <param name="entityCollection">Entities to simulate physics on.</param>
         public void Update(GameTime gameTime, EntityCollection entityCollection)
         {
             // Get the elapsed time since the last frame, in seconds.

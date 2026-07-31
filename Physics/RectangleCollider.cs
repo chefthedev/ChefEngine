@@ -11,10 +11,10 @@ namespace ChefEngine.Physics
     /// </summary>
     public class RectangleCollider : Collider
     {
-        // The rectangle representing the local bounds of the collider, relative to the owner itself.
+        // Local bounds of the collider, relative to the owner itself.
         public RectangleF LocalBounds { get; set; }
 
-        // The rectangle represending the bounds of the collider, relative to the owner's position in the world.
+        // Bounds of the collider, relative to the owner's position in the world.
         public RectangleF Bounds
         {
             get

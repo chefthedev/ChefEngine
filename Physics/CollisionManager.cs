@@ -12,7 +12,7 @@ namespace ChefEngine.Physics
         // Delegate function for testing collisions.
         private delegate CollisionResult CollisionTest(Collider a, Collider b);
 
-        // Dictionary for binding two types of colliders to the proper collision test.
+        // Bindings for types of colliders to the proper collision test.
         private static readonly Dictionary<(Type, Type), CollisionTest> _collisionTests;
 
         /// <summary>
@@ -34,8 +34,8 @@ namespace ChefEngine.Physics
         /// <summary>
         /// Checks the collision status between two colliders.
         /// </summary>
-        /// <param name="a">The first collider.</param>
-        /// <param name="b">The second collider.</param>
+        /// <param name="a">First collider.</param>
+        /// <param name="b">Second collider.</param>
         /// <returns>Collision result of the colliders.</returns>
         public static CollisionResult CheckCollision(Collider a, Collider b)
         {
@@ -60,8 +60,8 @@ namespace ChefEngine.Physics
         /// <summary>
         /// Determine if two rectangles are colliding.
         /// </summary>
-        /// <param name="a">The first rectangle.</param>
-        /// <param name="b">The second rectangle.</param>
+        /// <param name="a">First rectangle.</param>
+        /// <param name="b">Second rectangle.</param>
         /// <returns>Collision result of the rectangles.</returns>
         private static CollisionResult RectangleRectangle(RectangleCollider a, RectangleCollider b)
         {

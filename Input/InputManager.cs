@@ -5,10 +5,10 @@
     /// </summary>
     public class InputManager
     {
-        // The keyboard instance.
+        // Keyboard state manager.
         public KeyboardInfo Keyboard { get; private set; }
 
-        // The mouse instance.
+        // Mouse state manager.
         public MouseInfo Mouse { get; private set; }
 
         /// <summary>
@@ -16,7 +16,7 @@
         /// </summary>
         public InputManager()
         {
-            // Initialize the keyboard and mouse.
+            // Initialize the keyboard and mouse state managers.
             Keyboard = new KeyboardInfo();
             Mouse = new MouseInfo();
         }

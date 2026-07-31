@@ -1,6 +1,6 @@
 ﻿namespace ChefEngine.Input
 {
-    // The mouse button enum for modeling each button.
+    // Enum for modeling each mouse button.
     public enum MouseButton
     {
         Left = 0,

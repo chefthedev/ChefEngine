@@ -9,10 +9,10 @@ namespace ChefEngine.Input
     /// </summary>
     public class MouseInfo
     {
-        // The previous mouse state.
+        // Mouse state of the previous frame.
         public MouseState PreviousState { get; private set; }
 
-        // The current mouse state.
+        // Mouse state of the current frame.
         public MouseState CurrentState { get; private set; }
 
         // Position wrapper property.
@@ -36,22 +36,22 @@ namespace ChefEngine.Input
             set => SetPosition(CurrentState.X, value); // Sets the y coordinate of the mouse and maintains the x.
         }
 
-        // The change in position of the mouse.
+        // Change in X,Y position.
         public Point PositionDelta => CurrentState.Position - PreviousState.Position;
 
-        // The change in the x coordinate of the mouse.
+        // Change in the x coordinate.
         public int XDelta => CurrentState.X - PreviousState.X;
 
-        // The change in the y coordinate of the mouse.
+        // Change in the y coordinate.
         public int YDelta => CurrentState.Y - PreviousState.Y;
 
         // Whether the mouse was moved or not.
         public bool WasMoved => PositionDelta != Point.Zero;
 
-        // The current scroll wheel value of the mouse.
+        // Current scroll wheel value.
         public int ScrollWheel => CurrentState.ScrollWheelValue;
 
-        // The change in the scroll wheel value of the mouse.
+        // Change in the scroll wheel value.
         public int ScrollWheelDelta => CurrentState.ScrollWheelValue - PreviousState.ScrollWheelValue;
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace ChefEngine.Input
         /// <summary>
         /// Determines if a mouse button is currently down.
         /// </summary>
-        /// <param name="button">The target button.</param>
+        /// <param name="button">Target button.</param>
         /// <returns>Whether the button is down or not.</returns>
         public bool IsButtonDown(MouseButton button)
         {
@@ -90,7 +90,7 @@ namespace ChefEngine.Input
         /// <summary>
         /// Determines if a mouse button is currently up.
         /// </summary>
-        /// <param name="button">The target button.</param>
+        /// <param name="button">Target button.</param>
         /// <returns>Whether the button is up or not.</returns>
         public bool IsButtonUp(MouseButton button)
         {
@@ -101,7 +101,7 @@ namespace ChefEngine.Input
         /// <summary>
         /// Determines if a mouse button was just pressed.
         /// </summary>
-        /// <param name="button">The target button.</param>
+        /// <param name="button">Target button.</param>
         /// <returns>Whether the button was just pressed or not.</returns>
         public bool WasButtonJustPressed(MouseButton button)
         {
@@ -112,7 +112,7 @@ namespace ChefEngine.Input
         /// <summary>
         /// Determines if a mouse button was just released.
         /// </summary>
-        /// <param name="button">The target button.</param>
+        /// <param name="button">Target button.</param>
         /// <returns>Whether the button was just released or not.</returns>
         public bool WasButtonJustReleased(MouseButton button)
         {
@@ -123,8 +123,8 @@ namespace ChefEngine.Input
         /// <summary>
         /// Manually sets the position of the mouse.
         /// </summary>
-        /// <param name="x">The x coordinate to set.</param>
-        /// <param name="y">The y coordinate to set.</param>
+        /// <param name="x">X coordinate to set.</param>
+        /// <param name="y">Y coordinate to set.</param>
         public void SetPosition(int x, int y)
         {
             // Set the mouse's position.
@@ -146,8 +146,8 @@ namespace ChefEngine.Input
         /// <summary>
         /// Gets the button state of a mouse button from the provided mouse state.
         /// </summary>
-        /// <param name="state">The target mouse state.</param>
-        /// <param name="button">The target button.</param>
+        /// <param name="state">Target mouse state.</param>
+        /// <param name="button">Target button.</param>
         /// <returns>ButtonState of the button.</returns>
         private ButtonState GetButtonState(MouseState state, MouseButton button)
         {

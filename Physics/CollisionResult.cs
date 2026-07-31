@@ -10,10 +10,10 @@ namespace ChefEngine.Physics
         // Whether A is colliding with B.
         public bool HasCollision { get; private set; }
 
-        // The best geometric estimate of the collision normal, pointing from A toward B.
+        // Best geometric estimate of the collision normal, pointing from A toward B.
         public Vector2 Normal { get; private set; }
 
-        // The minimum translation distance required to separate the colliders.
+        // Minimum translation distance required to separate the colliders.
         public float PenetrationDepth { get; private set; }
 
         // Static collision result with a false value.
@@ -23,8 +23,8 @@ namespace ChefEngine.Physics
         /// Constructor for the CollisionResult struct.
         /// </summary>
         /// <param name="hasCollision">Whether a collision occurred or not.</param>
-        /// <param name="normal">The direction to separate the colliding objects.</param>
-        /// <param name="penetrationDepth">The amount of overlap between the objects.</param>
+        /// <param name="normal">Direction to separate the colliding objects.</param>
+        /// <param name="penetrationDepth">Amount of overlap between the objects.</param>
         public CollisionResult(bool hasCollision, Vector2 normal, float penetrationDepth)
         {
             // Set the collision result properties.

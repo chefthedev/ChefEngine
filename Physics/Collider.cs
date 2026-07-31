@@ -9,10 +9,10 @@ namespace ChefEngine.Physics
     /// </summary>
     public abstract class Collider
     {
-        // Reference to the owner entity of the collider.
+        // Reference to the owner entity.
         public Entity Owner { get; private set; }
 
-        // Enabled flag for the collider, defaulting to true.
+        // Whether the collider is enabled, defaulting to true.
         public bool IsEnabled { get; set; } = true;
 
         /// <summary>
@@ -28,9 +28,9 @@ namespace ChefEngine.Physics
         /// <summary>
         /// Draws the collider bounds for debugging.
         /// </summary>
-        /// <param name="spriteBatch">The sprite batch to draw the collider in.</param>
-        /// <param name="color">The color to draw the collider in.</param>
-        /// <param name="thickness">The thickness to draw the collider with.</param>
+        /// <param name="spriteBatch">Sprite batch to draw the collider in.</param>
+        /// <param name="color">Color to draw the collider in.</param>
+        /// <param name="thickness">Thickness to draw the collider with.</param>
         public abstract void DebugDraw(SpriteBatch spriteBatch, Color color, int thickness = 1);
     }
 }

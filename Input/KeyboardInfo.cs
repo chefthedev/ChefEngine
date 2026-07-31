@@ -7,10 +7,10 @@ namespace ChefEngine.Input
     /// </summary>
     public class KeyboardInfo
     {
-        // The previous keyboard state.
+        // Keyboard state of the previous frame.
         public KeyboardState PreviousState { get; private set; }
 
-        // The current keyboard state.
+        // Keyboard state of the new frame.
         public KeyboardState CurrentState { get; private set; }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace ChefEngine.Input
         /// <summary>
         /// Determines if a key is currently down.
         /// </summary>
-        /// <param name="key">The target key.</param>
+        /// <param name="key">Target key.</param>
         /// <returns>Whether the key is down or not.</returns>
         public bool IsKeyDown(Keys key)
         {
@@ -49,7 +49,7 @@ namespace ChefEngine.Input
         /// <summary>
         /// Determines if a key is currently up.
         /// </summary>
-        /// <param name="key">The target key.</param>
+        /// <param name="key">Target key.</param>
         /// <returns>Whether the key is up or not.</returns>
         public bool IsKeyUp(Keys key)
         {
@@ -60,7 +60,7 @@ namespace ChefEngine.Input
         /// <summary>
         /// Determines if a key was just pressed.
         /// </summary>
-        /// <param name="key">The target key.</param>
+        /// <param name="key">Target key.</param>
         /// <returns>Whether the key was just pressed or not.</returns>
         public bool WasKeyJustPressed(Keys key)
         {
@@ -71,7 +71,7 @@ namespace ChefEngine.Input
         /// <summary>
         /// Determines if a key was just released.
         /// </summary>
-        /// <param name="key">The target key.</param>
+        /// <param name="key">Target key.</param>
         /// <returns>Whether the key was just released or not.</returns>
         public bool WasKeyJustReleased(Keys key)
         {

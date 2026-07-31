@@ -10,13 +10,13 @@ namespace ChefEngine.Rendering
     /// </summary>
     public static class DebugRenderer
     {
-        // The pixel texture.
+        // Pixel texture.
         private static Texture2D? _pixel;
 
         /// <summary>
         /// Initializes the static DebugRenderer class.
         /// </summary>
-        /// <param name="graphicsDevice">The graphics device instance.</param>
+        /// <param name="graphicsDevice">Graphics device instance.</param>
         public static void Initialize(GraphicsDevice graphicsDevice)
         {
             // If the pixel texture was initialized.
@@ -34,10 +34,10 @@ namespace ChefEngine.Rendering
         /// <summary>
         /// Draws the outline of a Rectangle object.
         /// </summary>
-        /// <param name="spriteBatch">The sprite batch to draw in.</param>
-        /// <param name="rectangle">The Rectangle to draw the outline of.</param>
-        /// <param name="color">The color of outline to use.</param>
-        /// <param name="thickness">The thickness of outline to use.</param>
+        /// <param name="spriteBatch">Sprite batch to draw in.</param>
+        /// <param name="rectangle">Rectangle to draw the outline of.</param>
+        /// <param name="color">Color of outline to use.</param>
+        /// <param name="thickness">Thickness of outline to use.</param>
         public static void DrawRectangleOutline(SpriteBatch spriteBatch, Rectangle rectangle, Color color, int thickness = 1)
         {
             // If the pixel texture is not initialized.
@@ -79,10 +79,10 @@ namespace ChefEngine.Rendering
         /// <summary>
         /// Draws the outline of a RectangleF object.
         /// </summary>
-        /// <param name="spriteBatch">The sprite batch to draw in.</param>
-        /// <param name="rectangle">The RectangleF to draw the outline of.</param>
-        /// <param name="color">The color of outline to use.</param>
-        /// <param name="thickness">The thickness of outline to use.</param>
+        /// <param name="spriteBatch">Sprite batch to draw in.</param>
+        /// <param name="rectangle">RectangleF to draw the outline of.</param>
+        /// <param name="color">Color of outline to use.</param>
+        /// <param name="thickness">Thickness of outline to use.</param>
         public static void DrawRectangleFOutline(SpriteBatch spriteBatch, RectangleF rectangle, Color color, int thickness = 1)
         {
             // If the pixel texture is not initialized.
