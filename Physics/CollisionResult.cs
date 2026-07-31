@@ -32,5 +32,11 @@ namespace ChefEngine.Physics
             Normal = normal;
             PenetrationDepth = penetrationDepth;
         }
+
+        public override string ToString()
+        {
+            // Convert the collision result to a string representation.
+            return $"HasCollision: {HasCollision}. Normal: {Normal}. Penetration: {PenetrationDepth}.";
+        }
     }
 }

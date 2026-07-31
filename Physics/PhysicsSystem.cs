@@ -71,7 +71,7 @@ namespace ChefEngine.Physics
                             if (collisionResult.HasCollision)
                             {
                                 // Log it.
-                                Debug.WriteLine("Collision detected.");
+                                Debug.WriteLine(collisionResult.ToString());
                             }
                         }
                     }
